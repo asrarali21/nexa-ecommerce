@@ -6,6 +6,7 @@ import Userrouter from "./src/routes/user.route.js";
 import cookieParser from "cookie-parser";
 import Productroute from "./src/routes/product.route.js";
 import { errorHandler } from "./src/middleware/error.middleware.js";
+import cartRoute from "./src/routes/Cart.route.js";
 
 const app = express()
 
@@ -29,6 +30,7 @@ app.use(express.static("public"))
 
 app.use("/api/v1/users" , Userrouter)
 app.use("/api/v1/products" , Productroute)
+app.use("/api/v1/cart" , cartRoute)
 
 
 app.use(errorHandler)

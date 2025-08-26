@@ -1,12 +1,12 @@
-import { ApiError } from "../utils/ApiError"
+import { ApiError } from "../utils/ApiError.js"
 import jwt from "jsonwebtoken"
 
 
 
-const verifyuser = async(req , res)=>{
+const verifyuser = async(req , res ,next)=>{
 try {
-    const token = req.cookies?.accessToken || req.headers
-    
+    const token = req.cookies?.accessToken || 
+                     req.header("Authorization")?.replace("Bearer ", "")
     
     if (!token) {
          throw new ApiError(400 , "no token found")
@@ -22,7 +22,7 @@ try {
      
      next()
 } catch (error) {
-    throw new ApiError(400 , "invalid or expired token ")
+   next(new ApiError(401, "Invalid or expired token"));
 }
 }
 

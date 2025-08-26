@@ -19,7 +19,7 @@ const cartschema = new Schema({
     user :{
         type : mongoose.Schema.Types.ObjectId,
         ref :"User",
-          unique: true,       // one cart per user
+        unique: true,       // one cart per user
        required: true 
     },
     items :[Cartitemschema]
@@ -27,4 +27,4 @@ const cartschema = new Schema({
 
 
 
-export default mongoose.model('Cart', cartschema)
+export const Cart =  mongoose.model('Cart', cartschema)
