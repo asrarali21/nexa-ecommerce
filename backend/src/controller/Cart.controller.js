@@ -45,4 +45,15 @@ const addToCart = asyncHandler(async(req , res)=>{
 })
 
 
-export {addToCart}
+ const getCart = asyncHandler(async (req, res) => {
+  
+  const cart = await Cart.findOne({ user:req.user._id })
+  .populate('items.product', 'name price image')
+  console.log(cart);
+  res.status(200)
+  .json(new ApiResponse(200 , cart , "fetch cart successfully"))
+ })
+
+
+
+export {addToCart , getCart}
