@@ -7,7 +7,7 @@ export const productstate  = atom({
     default:selector({
         key:"productStateDefault",
         get:async()=>{
-               try {
+               try { 
         const res = await axios.get('http://localhost:8000/api/v1/products/productlist')
         return res.data?.data ?? []
       } catch (e) {

@@ -29,7 +29,6 @@ function Sports() {
                 <p className="text-stone-600 text-xs mb-3 line-clamp-2">{item.description}</p>
                 <div className="flex items-center justify-between">
                   <span className="text-lg font-semibold text-stone-900">₹{item.price}</span>
-                  <Button size="sm" variant="secondary" className="text-xs px-3 py-1">Add to Cart</Button>
                 </div>
               </div>
             </CardContent>

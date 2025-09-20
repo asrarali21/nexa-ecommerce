@@ -11,6 +11,7 @@ import Electronics from './pages/Electronics'
 import Fashion from './pages/Fashion'
 import Sports from './pages/Sports'
 import SingleProduct from './pages/SingleProduct'
+import Cart from './pages/Cart'
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
       <Route path="/singleProd/:id" element={<SingleProduct />} />
       <Route path='/fashion' element={<Fashion/>}/>
       <Route path='/sports' element={<Sports/>}/>
+      <Route path='/cart' element={<Cart/>}/>
     </Routes>
    </>
   )

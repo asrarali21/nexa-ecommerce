@@ -38,10 +38,7 @@ function Productgrid() {
                 <div className="p-6">
                   <h3 className="font-medium text-stone-900 mb-2">{item.name}</h3>
                   <div className="flex items-center justify-between">
-                    <span className="text-xl font-semibold text-stone-900">{item.price}</span>
-                    <Button size="sm" className="bg-stone-900 hover:bg-stone-800 text-white">
-                      Add to Cart
-                    </Button>
+                    <span className="text-xl font-semibold text-stone-900">₹{item.price}</span>
                   </div>
                 </div>
               </CardContent>

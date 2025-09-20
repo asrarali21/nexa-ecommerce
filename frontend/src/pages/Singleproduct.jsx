@@ -6,12 +6,14 @@ import { singleProductState } from '@/store/atoms/ProductState'
 import { Button } from '@/components/ui/button'
 import { Heart, Star, Minus, Plus } from 'lucide-react'
 import { useState } from 'react'
+import axios from 'axios'
 
 function SingleProduct() {
     const { id } = useParams() // Get product ID from URL
     const product = useRecoilValue(singleProductState(id)) // Pass ID to selector
     const [selectedImage, setSelectedImage] = useState(0)
     const [quantity, setQuantity] = useState(1)
+    console.log(quantity);
     
     if (!product) {
         return (
@@ -22,6 +24,18 @@ function SingleProduct() {
                 </div>
             </div>
         )
+    }
+
+
+
+    const HandleClick = async()=>{
+      try {
+          const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/v1/cart/add` , {productId:id , quantity} , {withCredentials:true})
+          console.log(response);
+      } catch (error) {
+        console.log(error);
+      }
+        
     }
     
     return (
@@ -98,7 +112,7 @@ function SingleProduct() {
 
                         {/* Action Buttons */}
                         <div className="flex space-x-4">
-                            <Button className="flex-1 bg-stone-900 hover:bg-stone-800">
+                            <Button onClick={HandleClick} className="flex-1 bg-stone-900 hover:bg-stone-800 cursor-pointer">
                                 Add to Cart
                             </Button>
                             <Button variant="outline" size="icon">

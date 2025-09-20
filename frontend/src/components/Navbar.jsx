@@ -250,7 +250,7 @@ function Navbar() {
 
                         <Heart className="h-5 w-5 text-stone-600 hover:text-stone-900 cursor-pointer transition-colors" />
                         <div className="relative">
-                            <ShoppingCart className="h-5 w-5 text-stone-600 hover:text-stone-900 cursor-pointer transition-colors" />
+                            <ShoppingCart onClick={()=>navigate("cart")} className="h-5 w-5 text-stone-600 hover:text-stone-900 cursor-pointer transition-colors" />
                             <span className="absolute -top-2 -right-2 bg-stone-900 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
                                 2
                             </span>
