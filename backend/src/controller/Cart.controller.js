@@ -29,7 +29,7 @@ const addToCart = asyncHandler(async(req , res)=>{
     if (itemIndex>-1) {
         cart.items[itemIndex].quantity += quantity
         if (cart.items[itemIndex].quantity < quantity) {
-              cart.items[itemIndex].quantity = 1;  // for preventing negative quantify
+              cart.items[itemIndex].quantity = 1;  // for preventing negative quantity
         }
     }else{
       cart.items.push({ product: productId, quantity });
@@ -54,6 +54,32 @@ const addToCart = asyncHandler(async(req , res)=>{
   .json(new ApiResponse(200 , cart , "fetch cart successfully"))
  })
 
+ const updateQuantity = asyncHandler(async (req, res) => {
+  const { productId, quantity } = req.body;
 
+  const cart = await Cart.findOneAndUpdate(
+    { user: req.user._id, "items.product": productId },
+    { $set: { "items.$.quantity": quantity } },
+    { new: true }
+  );
 
-export {addToCart , getCart}
+  res.json(new ApiResponse(200, cart, "Quantity updated"));
+});
+
+const deletecart = asyncHandler(async(req , res)=>{
+
+      const { productId } = req.params; 
+      const deletecart = await Cart.findOneAndUpdate(
+        {user:req.user._id},
+        {$pull:{items :{product: productId } }},
+         {new:true}
+      )
+
+      console.log(deletecart);
+      
+
+      res.status(200)
+      .json(new ApiResponse(200 , {deletecart} , "cart deleted successfully"))
+})
+
+export {addToCart , getCart ,deletecart , updateQuantity}
