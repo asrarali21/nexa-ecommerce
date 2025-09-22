@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button'
 import { Heart, Star, Minus, Plus } from 'lucide-react'
 import { useState } from 'react'
 import axios from 'axios'
+import { handlesuccess } from '@/toast.util'
 
 function SingleProduct() {
     const { id } = useParams() // Get product ID from URL
@@ -31,6 +32,7 @@ function SingleProduct() {
     const HandleClick = async()=>{
       try {
           const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/v1/cart/add` , {productId:id , quantity} , {withCredentials:true})
+          handlesuccess("product added successfully")
           console.log(response);
       } catch (error) {
         console.log(error);

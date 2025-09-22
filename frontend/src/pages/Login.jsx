@@ -27,7 +27,7 @@ const setAuth = useSetRecoilState(authState)
   return handleError("all fields are required")
     }
     try {
-     const response =  await  axios.post("http://localhost:8000/api/v1/users/loginUser" , logininfo ,{
+     const response =  await  axios.post(`${import.meta.env.VITE_API_URL}/api/v1/users/loginUser` , logininfo ,{
    withCredentials: true
     })
     console.log(response.data.data);

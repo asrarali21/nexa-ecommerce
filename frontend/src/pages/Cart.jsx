@@ -93,7 +93,7 @@ function Cart() {
                 onClick={() => handleDelete(item.productId)}
                 className="p-1 hover:text-red-600"
               >
-                <Trash2 />
+                <Trash2  className='cursor-pointer'/>
               </button>
             </div>
           ))}
