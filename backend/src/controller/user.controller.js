@@ -131,4 +131,16 @@ const adminlogout = asyncHandler(async(req , res) =>{
 })
 
 
-export{registerUser , loginUser , logoutUser ,adminLogin , adminlogout}
+const ValidatedToken = asyncHandler(async (req , res)=>{
+     
+    const user = {
+        _id : req.user._id,
+        email:req.user.email,
+        name:req.user.name,
+    }
+    res.status(200)
+    .json(new ApiResponse (200 , user , "user validated" ))
+})
+
+
+export{registerUser , loginUser , logoutUser ,adminLogin , adminlogout , ValidatedToken}
