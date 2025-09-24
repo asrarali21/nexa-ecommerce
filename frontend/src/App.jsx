@@ -12,9 +12,12 @@ import Fashion from './pages/Fashion'
 import Sports from './pages/Sports'
 import SingleProduct from './pages/SingleProduct'
 import Cart from './pages/Cart'
+import useRestoreAuth from './useRestore'
 
 
 function App() {
+
+  useRestoreAuth()
    
      
  
