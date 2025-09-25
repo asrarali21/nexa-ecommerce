@@ -4,9 +4,12 @@ import axios from 'axios'
 import { handleError, handlesuccess } from '../toast.util'
 import { useSetRecoilState } from 'recoil'
 import { authState } from '../store/atoms/authAtom';
+import { LoadingStateApi } from '@/store/atoms/Loading.state'
 
 function Login() {
     const navigate = useNavigate()
+
+    const Setloading = useSetRecoilState(LoadingStateApi)
 
     function handleregisterclick() {
         navigate("/register")
@@ -27,6 +30,7 @@ const setAuth = useSetRecoilState(authState)
   return handleError("all fields are required")
     }
     try {
+        Setloading(true)
      const response =  await  axios.post(`${import.meta.env.VITE_API_URL}/api/v1/users/loginUser` , logininfo ,{
    withCredentials: true
     })
@@ -47,6 +51,8 @@ const setAuth = useSetRecoilState(authState)
     handleError(error.response.data.message)
     console.log(error);
     
+     }finally{
+        Setloading(false)
      }
    }
 

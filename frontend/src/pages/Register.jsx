@@ -3,6 +3,8 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { handleError, handlesuccess } from '../toast.util';
+import { useSetRecoilState } from 'recoil';
+import { LoadingStateApi } from '@/store/atoms/Loading.state';
 
 function Register() {
 
@@ -11,6 +13,8 @@ function Register() {
   email: "",
   password: ""
 });
+
+const setloading = useSetRecoilState(LoadingStateApi)
 
 console.log(formData);
 
@@ -27,6 +31,7 @@ console.log(formData);
   return handleError("all fields are required")
     }
     try {
+      setloading(true)
      const response =  await  axios.post(`${import.meta.env.VITE_API_URL}/api/v1/users/registerUser` , formData ,{
    withCredentials: true
     })  
@@ -42,6 +47,8 @@ console.log(formData);
     handleError(error.response.data.message)
     console.log(error.response.data.message);
     
+     }finally{
+      setloading(false)
      }
 
    
