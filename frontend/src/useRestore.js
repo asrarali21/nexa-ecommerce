@@ -19,12 +19,12 @@ function useRestoreAuth(){
             
             setAuth({
                 isLoggedIn:true,
-                user:null
+                user:response.data.data
             })
         } catch {
              setAuth({
           isLoggedIn: true,
-          user: res.data.user
+          user: res.data.data
         })
         }
       }

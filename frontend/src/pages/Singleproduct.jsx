@@ -1,13 +1,14 @@
 // Create: /src/pages/SingleProduct.jsx
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import { useRecoilValue } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { singleProductState } from '@/store/atoms/ProductState'
 import { Button } from '@/components/ui/button'
 import { Heart, Star, Minus, Plus } from 'lucide-react'
 import { useState } from 'react'
 import axios from 'axios'
 import { handlesuccess } from '@/toast.util'
+import { LoadingStateApi } from '@/store/atoms/Loading.state'
 
 function SingleProduct() {
     const { id } = useParams() // Get product ID from URL
@@ -15,6 +16,8 @@ function SingleProduct() {
     const [selectedImage, setSelectedImage] = useState(0)
     const [quantity, setQuantity] = useState(1)
     console.log(quantity);
+
+    const setLoading = useSetRecoilState(LoadingStateApi)
     
     if (!product) {
         return (
@@ -31,11 +34,14 @@ function SingleProduct() {
 
     const HandleClick = async()=>{
       try {
+        setLoading(true)
           const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/v1/cart/add` , {productId:id , quantity} , {withCredentials:true})
           handlesuccess("product added successfully")
           console.log(response);
       } catch (error) {
         console.log(error);
+      }finally{
+        setLoading(false)
       }
         
     }

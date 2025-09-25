@@ -1,19 +1,22 @@
+import { LoadingStateApi } from '@/store/atoms/Loading.state'
 import axios from 'axios'
 import { Trash2 } from 'lucide-react'
 
 import React, { useEffect, useState } from 'react'
+import { useSetRecoilState } from 'recoil'
 
 function Cart() {
   // Initialize with a safe shape
+    const setLoading = useSetRecoilState(LoadingStateApi)
   const [cart, setCart] = useState({ items: [], totalItems: 0, totalPrice: 0 })
   console.log(cart);
   
-  const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
   useEffect(() => {
     const fetchDetails = async () => {
       try {
+        setLoading(true)
         const res = await axios.get(
           `${import.meta.env.VITE_API_URL}/api/v1/cart/getcart`,
           { withCredentials: true }
@@ -44,6 +47,14 @@ function Cart() {
     fetchDetails()
   }, [])
 
+  function handleClick(){
+      try {
+        
+      } catch (error) {
+        
+      }
+  }
+
   // Move handleDelete inside Cart component and fix async usage
   const handleDelete = async (productId) => {
     console.log(productId);
@@ -69,8 +80,6 @@ function Cart() {
     }
   };
 
-  if (loading) return <div>Loading…</div>
-  if (error) return <div>{error}</div>
 
   return (
     <div className="p-4">
@@ -102,6 +111,8 @@ function Cart() {
             <div>Total items: {cart.totalItems}</div>
             <div>Total price: ₹{cart.totalPrice}</div>
           </div>
+
+          <button className='bg-black text-white cursor-pointer' onClick={handleClick}>Buy now</button>
         </>
       )}
     </div>
