@@ -13,11 +13,15 @@ const orderSchema = new Schema({
     amount :{
        type : Number
     },
+      currency: { type: String, 
+        default: "INR" 
+    },
     PaymentStatus : {
       type : String,
       emum : ["PENDING","SUCCESS","FAILED"],
       default : "PENDING"
     },
+
      razorpayOrderId: { 
     type: String
  },
