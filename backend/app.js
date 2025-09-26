@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser";
 import Productroute from "./src/routes/product.route.js";
 import { errorHandler } from "./src/middleware/error.middleware.js";
 import cartRoute from "./src/routes/Cart.route.js";
+import orderRouter from "./src/routes/Order.route.js";
 
 const app = express()
 
@@ -36,6 +37,7 @@ app.use(express.static("public"))
 app.use("/api/v1/users" , Userrouter)
 app.use("/api/v1/products" , Productroute)
 app.use("/api/v1/cart" , cartRoute)
+app.use("/api/v1/order" , orderRouter)
 
 
 app.use(errorHandler)
