@@ -6,7 +6,7 @@ import {v2 as cloudinary } from "cloudinary";
 
 dotenv.config()
 
-
+console.log("key Id",process.env.RAZORPAY_KEY_ID)
 
 cloudinary.config({ 
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
